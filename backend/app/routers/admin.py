@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session, joinedload
 
 from app.core.database import get_db
 from app.core.deps import require_roles
+from app.models.category import Category
 from app.models.gear import GearItem
 from app.models.rental import RentalOrder
 from app.models.user import User

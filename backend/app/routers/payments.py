@@ -70,8 +70,8 @@ def create_payment(
             session = create_stripe_checkout_session(
                 amount=amount,
                 currency=currency,
-                success_url=f"{settings.FRONTEND_URL}/payments/stripe/success?session_id={{CHECKOUT_SESSION_ID}}",
-                cancel_url=f"{settings.FRONTEND_URL}/payments/stripe/cancel?order_id={order.id}",
+                success_url=f"{settings.FRONTEND_URL}/payment/success?session_id={{CHECKOUT_SESSION_ID}}",
+                cancel_url=f"{settings.FRONTEND_URL}/payment/cancel?order_id={order.id}",
                 metadata={"rental_order_id": str(order.id), "transaction_id": tran_id},
                 product_name=f"GearUp Rental Order #{order.id}",
             )
@@ -84,9 +84,9 @@ def create_payment(
             amount=amount,
             currency=currency,
             tran_id=tran_id,
-            success_url=f"{settings.FRONTEND_URL}/payments/sslcommerz/success?order_id={order.id}",
-            fail_url=f"{settings.FRONTEND_URL}/payments/sslcommerz/fail?order_id={order.id}",
-            cancel_url=f"{settings.FRONTEND_URL}/payments/sslcommerz/cancel?order_id={order.id}",
+            success_url=f"{settings.FRONTEND_URL}/payment/success?order_id={order.id}",
+            fail_url=f"{settings.FRONTEND_URL}/payment/cancel?order_id={order.id}",
+            cancel_url=f"{settings.FRONTEND_URL}/payment/cancel?order_id={order.id}",
             product_name=f"GearUp Rental Order #{order.id}",
             cus_name=customer.name,
             cus_email=customer.email,

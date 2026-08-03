@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session, joinedload
 from app.core.database import get_db
 from app.core.deps import require_roles
 from app.models.gear import GearItem
-from app.models.rental import RentalOrder
+from app.models.rental import RentalOrder, RentalOrderItem
 from app.models.user import User
 from app.schemas.rental import RentalOrderOut, RentalStatusUpdate
 
@@ -26,7 +26,7 @@ def list_incoming_orders(
     order_ids = (
         db.query(RentalOrder.id)
         .join(RentalOrder.items)
-        .filter(GearItem.id.in_(my_gear_ids))
+        .filter(RentalOrderItem.gear_id.in_(my_gear_ids))
         .distinct()
         .all()
     )
